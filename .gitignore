@@ -1,0 +1,4 @@
+# Ignore audio files and related directories
+audios/
+downloads/
+trimmed_audios/

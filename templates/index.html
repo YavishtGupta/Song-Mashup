@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Runner</title>
+    <style>
+        /* Loader CSS */
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            display: none; /* Hidden by default */
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        // Show the loader when form is submitted
+        function showLoader() {
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('output').style.display = 'none'; // Hide previous output
+        }
+    </script>
+</head>
+<body>
+    <h1>Run the Python Pipeline</h1>
+
+    <form method="POST" action="/run" onsubmit="showLoader()">
+        <button type="submit">Run Pipeline</button>
+    </form>
+
+    <!-- Loader -->
+    <div id="loader" class="loader"></div>
+
+    <!-- Output display area -->
+    {% if output %}
+        <h2>Output:</h2>
+        <pre id="output">{{ output }}</pre>
+        <a href="{{ url_for('download_file') }}">Download Final Output Audio</a> <!-- Download link -->
+    {% endif %}
+</body>
+</html>
